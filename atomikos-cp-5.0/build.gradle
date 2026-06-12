@@ -7,9 +7,9 @@ dependencies {
     implementation 'com.atomikos:transactions-jdbc:5.0.0'
 
    // New Relic Labs Java Agent dependencies
-   implementation 'com.newrelic.agent.java:newrelic-agent:6.0.0'
-   implementation 'com.newrelic.agent.java:newrelic-api:6.0.0'
-   implementation fileTree(include: ['*.jar'], dir: '../libs')
+   implementation 'com.newrelic.agent.java:newrelic-agent:' + project.findProperty('java.agent.version')
+   implementation 'com.newrelic.agent.java:newrelic-api:' + project.findProperty('java.agent.version')
+   implementation 'com.newrelic.agent.java:agent-bridge:' + project.findProperty('java.agent.version')
 }
 
 jar {
@@ -22,6 +22,6 @@ jar {
 }
 
 verifyInstrumentation {
-    passes 'com.atomikos:transactions-jdbc:[5.0.0,6.0.0)'
+    passesOnly 'com.atomikos:transactions-jdbc:[5.0.0,6.0.0)'
     excludeRegex '.*M[0-9]'
 }
